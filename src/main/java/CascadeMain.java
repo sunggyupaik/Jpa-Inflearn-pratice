@@ -34,6 +34,12 @@ public class CascadeMain {
             parent.getChildList().add(child2);
             em.persist(parent);
 
+            em.flush();
+            em.clear();
+
+            Parent savedParent = em.find(Parent.class, parent.getId());
+            savedParent.getChildList().remove(0);
+
             tx.commit();
         } catch(Exception e) {
             tx.rollback();
