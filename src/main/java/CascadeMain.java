@@ -19,7 +19,6 @@ public class CascadeMain {
         try {
             Parent parent = new Parent();
             parent.setName("parent");
-            em.persist(parent);
 
             Child child1 = new Child();
             child1.setName("child1");
@@ -29,8 +28,11 @@ public class CascadeMain {
             child2.setName("child2");
             child2.setParent(parent);
 
-            em.persist(child1);
-            em.persist(child2);
+            //em.persist(child1);
+            //em.persist(child2);
+            parent.getChildList().add(child1);
+            parent.getChildList().add(child2);
+            em.persist(parent);
 
             tx.commit();
         } catch(Exception e) {
