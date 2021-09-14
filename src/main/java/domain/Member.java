@@ -12,7 +12,7 @@ public class Member {
 
     private int age;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
@@ -46,6 +46,16 @@ public class Member {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", team=" + team +
+                '}';
     }
 }
 
