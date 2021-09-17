@@ -15,15 +15,20 @@ public class ProxyMain {
 
         tx.begin();
         try {
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
+
             Member member = new Member();
             member.setName("memberA");
+            member.setTeam(team);
             em.persist(member);
 
             em.flush();
             em.clear();
 
-            Member savedMember = em.getReference(Member.class, member.getId());
-            System.out.println(savedMember.getClass());
+            Member savedMember = em.find(Member.class, member.getId());
+            Team savedTeam = savedMember.getTeam();
 
             tx.commit();
         } catch(Exception e) {
