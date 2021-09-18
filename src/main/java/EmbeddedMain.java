@@ -17,6 +17,7 @@ public class EmbeddedMain {
         try {
             Member member = new Member();
             member.setHomeAddress(new Address("1000", "zip", "Street"));
+            member.setWorkAddress(new Address("work1000", "workzip", "workStreet"));
             em.persist(member);
 
             tx.commit();
