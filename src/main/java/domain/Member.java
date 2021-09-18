@@ -27,9 +27,14 @@ public class Member {
     @CollectionTable(name = "favorite_food", joinColumns = @JoinColumn(name = "member_id"))
     private Set<String> favoriteFoods = new HashSet<>();
 
-    @ElementCollection
-    @CollectionTable(name = "address", joinColumns = @JoinColumn(name = "member_id"))
-    private List<Address> addressHistory = new ArrayList<>();
+//    @OrderColumn(name = "address_history_order")
+//    @ElementCollection
+//    @CollectionTable(name = "address", joinColumns = @JoinColumn(name = "member_id"))
+//    private List<Address> addressHistory = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "MEMBER_ID")
+    List<AddressEntity> addressHistory = new ArrayList<>();
 
 //    @Embedded
 //    @AttributeOverrides({
@@ -99,11 +104,11 @@ public class Member {
         this.favoriteFoods = favoriteFoods;
     }
 
-    public List<Address> getAddressHistory() {
+    public List<AddressEntity> getAddressHistory() {
         return addressHistory;
     }
 
-    public void setAddressHistory(List<Address> addressHistory) {
+    public void setAddressHistory(List<AddressEntity> addressHistory) {
         this.addressHistory = addressHistory;
     }
 
