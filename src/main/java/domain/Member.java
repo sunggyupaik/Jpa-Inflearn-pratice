@@ -2,6 +2,10 @@ package domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Member {
@@ -18,6 +22,14 @@ public class Member {
 
     @Embedded
     private Address homeAddress;
+
+    @ElementCollection
+    @CollectionTable(name = "favorite_food", joinColumns = @JoinColumn(name = "member_id"))
+    private Set<String> favoriteFoods = new HashSet<>();
+
+    @ElementCollection
+    @CollectionTable(name = "address", joinColumns = @JoinColumn(name = "member_id"))
+    private List<Address> addressHistory = new ArrayList<>();
 
 //    @Embedded
 //    @AttributeOverrides({
@@ -79,7 +91,23 @@ public class Member {
         this.homeAddress = homeAddress;
     }
 
-//    public Address getWorkAddress() {
+    public Set<String> getFavoriteFoods() {
+        return favoriteFoods;
+    }
+
+    public void setFavoriteFoods(Set<String> favoriteFoods) {
+        this.favoriteFoods = favoriteFoods;
+    }
+
+    public List<Address> getAddressHistory() {
+        return addressHistory;
+    }
+
+    public void setAddressHistory(List<Address> addressHistory) {
+        this.addressHistory = addressHistory;
+    }
+
+    //    public Address getWorkAddress() {
 //        return workAddress;
 //    }
 //
