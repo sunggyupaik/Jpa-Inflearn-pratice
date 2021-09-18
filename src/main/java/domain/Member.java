@@ -19,13 +19,13 @@ public class Member {
     @Embedded
     private Address homeAddress;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name ="city", column = @Column(name = "work_city")),
-            @AttributeOverride(name ="street", column = @Column(name = "work_street")),
-            @AttributeOverride(name ="zipcode", column = @Column(name = "work_zipcode"))
-    })
-    private Address workAddress;
+//    @Embedded
+//    @AttributeOverrides({
+//            @AttributeOverride(name ="city", column = @Column(name = "work_city")),
+//            @AttributeOverride(name ="street", column = @Column(name = "work_street")),
+//            @AttributeOverride(name ="zipcode", column = @Column(name = "work_zipcode"))
+//    })
+//    private Address workAddress;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
@@ -79,13 +79,13 @@ public class Member {
         this.homeAddress = homeAddress;
     }
 
-    public Address getWorkAddress() {
-        return workAddress;
-    }
-
-    public void setWorkAddress(Address workAddress) {
-        this.workAddress = workAddress;
-    }
+//    public Address getWorkAddress() {
+//        return workAddress;
+//    }
+//
+//    public void setWorkAddress(Address workAddress) {
+//        this.workAddress = workAddress;
+//    }
 
     @Override
     public String toString() {

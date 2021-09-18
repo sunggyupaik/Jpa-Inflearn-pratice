@@ -15,10 +15,10 @@ public class EmbeddedMain {
 
         tx.begin();
         try {
-            Member member = new Member();
-            member.setHomeAddress(new Address("1000", "zip", "Street"));
-            member.setWorkAddress(new Address("work1000", "workzip", "workStreet"));
-            em.persist(member);
+            Address address1 = new Address("1000", "zip", "Street");
+            Address address2 = new Address("1000", "zip", "Street");
+            System.out.println("address1 == address2 : " + (address1 == address2));
+            System.out.println("address1 == address2 : " + (address1.equals(address2)));
 
             tx.commit();
         } catch(Exception e) {
