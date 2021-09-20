@@ -1,4 +1,6 @@
 import domain.Member;
+import domain.MemberDto;
+import domain.Team;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -22,11 +24,12 @@ public class QueryMain {
             em.flush();
             em.clear();
 
-            List<Member> result = em.createQuery("select m from Member m", Member.class)
+            List<MemberDto> resultList = em.createQuery("select new domain.MemberDto(m.name, m.age) from Member m")
                     .getResultList();
 
-            Member findMember = result.get(0);
-            findMember.setAge(20);
+            MemberDto result = resultList.get(0);
+            System.out.println(result.getName());
+            System.out.println(result.getAge());
 
             tx.commit();
         } catch(Exception e) {
