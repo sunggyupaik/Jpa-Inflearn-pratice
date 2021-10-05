@@ -40,7 +40,7 @@ public class FetchJoin2 {
 
             em.flush();
             em.clear();
-            
+
             //단순하게 lazy 로딩으로 페이징 처리하기
            String query = "select t From Team t";
 
@@ -50,6 +50,22 @@ public class FetchJoin2 {
                     .getResultList();
 
             for(Team team : result) {
+                System.out.println("teamName=" + team.getName() + ","
+                        + "members=" + team.getMembers().size());
+                for(Member member : team.getMembers()) {
+                    System.out.println("-> member = " + member);
+                }
+            }
+
+            //연관 컬렉션 fetch join 페이징 처리하기(위험)
+            String query2 = "select t From Team t join fetch t.members m";
+
+            List<Team> result2 = em.createQuery(query2, Team.class)
+                    .setFirstResult(0)
+                    .setMaxResults(2)
+                    .getResultList();
+
+            for(Team team : result2) {
                 System.out.println("teamName=" + team.getName() + ","
                         + "members=" + team.getMembers().size());
                 for(Member member : team.getMembers()) {
