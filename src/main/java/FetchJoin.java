@@ -72,6 +72,16 @@ public class FetchJoin {
                         + "members=" + team.getMembers().size());
             }
 
+            //fetch join으로 연관 컬렉션 중복 제거 후 조회
+            String query4 = "select distinct t From Team t join fetch t.members";
+            List<Team> teams2 = em.createQuery(query4, Team.class)
+                    .getResultList();
+
+            for(Team team : teams2) {
+                System.out.println("username=" + team.getName() + ","
+                        + "members=" + team.getMembers().size());
+            }
+
             tx.commit();
         } catch(Exception e) {
             tx.rollback();
