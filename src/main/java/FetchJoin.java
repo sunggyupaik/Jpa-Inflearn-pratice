@@ -42,11 +42,22 @@ public class FetchJoin {
             em.flush();
             em.clear();
 
-            String query = "select m From Member m join fetch m.team";
+            //LAZY로 연관 엔티티 조회
+            String query = "select m From Member m";
             List<Member> members = em.createQuery(query, Member.class)
-                            .getResultList();
+                    .getResultList();
 
             for(Member member : members) {
+                System.out.println("username=" + member.getName() + ","
+                        + "teamName=" + member.getTeam().getName());
+            }
+
+            //fetch join으로 연관 엔티티 조회
+            String query2 = "select m From Member m join fetch m.team";
+            List<Member> members2 = em.createQuery(query2, Member.class)
+                            .getResultList();
+
+            for(Member member : members2) {
                 System.out.println("username=" + member.getName() + ","
                         + "teamName=" + member.getTeam().getName());
             }
