@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.Collection;
 import java.util.List;
 
 public class getMain {
@@ -42,6 +43,14 @@ public class getMain {
                     .getResultList();
 
             for(Team s : result2) {
+                System.out.println(s);
+            }
+
+            String query3 = "SELECT t.members FROM Team t";
+            List<Collection> result3 = em.createQuery(query3, Collection.class)
+                    .getResultList();
+
+            for(Object s : result3) {
                 System.out.println(s);
             }
 
