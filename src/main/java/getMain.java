@@ -54,6 +54,14 @@ public class getMain {
                 System.out.println(s);
             }
 
+            String query4 = "SELECT m FROM Team t JOIN t.members m";
+            List<Member> result4 = em.createQuery(query4, Member.class)
+                    .getResultList();
+
+            for(Member s : result4) {
+                System.out.println(s);
+            }
+
             tx.commit();
         } catch(Exception e) {
             tx.rollback();
