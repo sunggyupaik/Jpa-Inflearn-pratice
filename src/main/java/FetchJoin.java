@@ -62,6 +62,16 @@ public class FetchJoin {
                         + "teamName=" + member.getTeam().getName());
             }
 
+            //fetch join으로 연관 컬렉션 조회
+            String query3 = "select t From Team t join fetch t.members";
+            List<Team> teams = em.createQuery(query3, Team.class)
+                    .getResultList();
+
+            for(Team team : teams) {
+                System.out.println("username=" + team.getName() + ","
+                        + "members=" + team.getMembers().size());
+            }
+
             tx.commit();
         } catch(Exception e) {
             tx.rollback();
